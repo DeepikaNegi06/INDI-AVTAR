@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div class="container">
+    <p>Please provide your details for timely Delivery.</p>
+    <hr>
+     
+    <!-- <label for="FirstName"><b>FirstName</b></label>
+    <input type="text" placeholder="Enter FirstName" name="FirstName" required>
+
+    <label for="LastName"><b>LastName</b></label>
+    <input type="LastName" placeholder="Enter LastName" name="LastName" required> -->
+    {% csrf_token %}
+    <label for="Delivery_Address"><b>Delivery_Address</b></label>
+    <input type="Delivery_Address" placeholder="Delivery_Address" name="Delivery_Address" required>
+    
+   
+    <div>
+      <button class="button1"><a class="nav-link" href="{%url 'orderdelivery' %}">submit</a></button>
+
+      <!-- <button class="button1", style="float: right;" ><a class="nav-link" href="{%url 'checkout' %}">Pay on Delivery</a></button> -->
+
+    </div>
+  </div>
+</form>
+
+</body>
+</html>

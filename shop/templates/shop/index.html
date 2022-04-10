@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shop/style.css' %}">
+
+
+ <title>Welcome to home page</title>
+  </head>
+  <body>
+      <!--nav-->
+      <nav class="navbar navbar-expand-md navbar-light sticky-top">
+          <div class="container-fluid">
+              <a class="navbar-brand" href="#"><img src="{% static "shop/images/logo_Indi_Avtar-Final (1).png" %}" alt="" /></a>
+              
+              
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                      
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">About</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link"  href="{%url 'item' %}">Products</a>
+                      </li>
+                      
+                    {%if user.is_authenticated%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'wishlist' %}"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{%url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'getout' %}"> Logout</a>
+                    </li>
+                    {%else%}
+                      <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Login/Register
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="{%url 'signup' %}">Registration</a>
+                              <a class="dropdown-item" href="{%url 'getin' %}">Login</a>
+                              
+                            </div>
+                          </div>
+                      </li>
+                      {%endif%}
+                      
+                  </ul>        
+
+              </div>
+                  
+          </div>
+      </nav>
+   <!-- Image Slider  -->
+   <div id="slides" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static "shop/images/first.png" %}" alt="" />
+        </div>
+        <div class="carousel-item">
+            <img src="{% static "shop/images/second.png" %}" alt="" />
+        </div>
+        <div class="carousel-item">
+            <img src="{% static "shop/images/third.png" %}" alt="" />
+          </div>
+    </div>
+</div>    
+
+<section id="featured" class="my-5 mt-5">
+    <div class="container text-center py-5">
+        <h3 class="pt-5">Products</h3>
+        <hr class="mx-auto">
+    </div>
+    
+    <div class="row mx-auto container-fluid">
+        {%for product in products%}
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" src="/media/{{product.images}}" alt="" />
+            <div class="star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <h4 class="p-price"><span style='font-size:20px;'>&#8377;</span> {{product.price}}</h4>
+            <p>{{product.description}}</p>
+            <div class="d-flex flex-row justify-content-center align-items-center ">
+                <form action="{% url 'cart' %}" method="post">
+                    {%csrf_token%}
+                    <input hidden=true name="product_id" type="text" value="{{product.product_id}}">
+                    <input hidden=true name="price" type="text" value="{{product.price}}">
+                    <input hidden=true name="qty" type="number" value=1>
+                <button type="submit" class="btn btn-danger">Add to cart</button></form>
+                <form action="{% url 'wishlist' %}" method="post">
+                    {%csrf_token%}
+                    <input hidden=true name="product_id" type="text" value="{{product.product_id}}">
+                <button type ="submit" style="border: none; background-color: white;"><i class="fa fa-heart" aria-hidden="true"></i></button> </form>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+        
+</section>
+<!--banner-->
+<section id="banner" class="my-5 py-5">
+<div class="container">
+    <h4>SEASON'S SALE</h4>
+    <h1>Summer Collection<br>
+        UP TO 20% OFF</h1>
+    <!-- <button type="button" class="btn btn-danger">shop now</button> -->
+</div>
+</section>
+<!--About-->
+<div class="container sun">
+<div class="row">
+    <div class="text-center">
+        <div class="container text-center">
+            <h3>About</h3>
+            <hr>
+        </div>
+        <p id="para">Indi Avtar was founded by a group of like-minded fashion devotees, determined to deliver style to shoppers worldwide. Our store offers a huge collection of Ladies Suits for women at affordable prices also we want to create an ease for customers to buy products directly from an online shopping site and save there time .</p>
+    </div>
+</div>
+</div>
+</div>
+<footer class="mt-5 py-5">
+<div class="row container mx-auto pt-5">
+    <div class="footer-one col-lg-6 col-md-6 col-12">
+        <h5 class="pb-2">Quick links</h5>
+        <ul class="text-uppercase list-unstyled">
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="{%url 'contactus' %}">Contact Us</a></li>
+            <li><a href="#">Featured Products</a></li>
+            <li><a href="#">cart</a></li>
+            <li><a href="#">Payment gateway</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+    <div class="footer-one col-lg-4 col-md-6 col-12">
+        <h5 class="pb-2">Contact</h5>
+        <div>
+            <h6 class="text-uppercase">Address</h6>
+            <p>123 street name,city,India</p>
+        </div>
+        <div>
+            <h6 class="text-uppercase">Phone Number</h6>
+            <p>123456789</p>
+        </div>
+        <div>
+            <h6 class="text-uppercase">Email</h6>
+            <p>123 street name,city,India</p>
+        </div>
+    </div>
+</div>
+<div class="container padding">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="container-fluid padding" id="connect">
+                <div class="row text-center padding">
+                    <div class="col-12">
+                        <h4 class="pt-5">Connect</h4>
+                        <hr>
+                    </div>
+                    <div class="col-12 social padding">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <P>&copy;2022 <br>All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</footer>
+
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
+

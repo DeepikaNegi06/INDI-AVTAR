@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>body{
+        text-align: center;
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+    h2{
+        font-size: 50px;
+        color: seagreen;
+    
+        padding-top: 10px;
+    }
+    .cart-page{
+        margin: 80px auto;
+    }
+    
+    table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .cart-info{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    th{
+        text-align: left;
+        padding: 5px;
+        color: darkred;
+        background: yellowgreen;
+        font-weight: normal;
+    
+    }
+    
+    td{
+        padding: 10px 5px;
+    }
+    
+    td input{
+        width: 40px;
+        height: 30px;
+        padding: 5px;
+    }
+    
+    td a{
+        color: darkred;
+        font-size: 12px;
+    }
+    
+    td img{
+        width: 150px;
+        height: 150px;
+        margin-right: 10px;
+    }
+    
+    .total-price{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .total-price table{
+        border-top: 3px solid seagreen;
+        width: 300px;
+        max-width: 350px;
+        
+    }
+    
+    td:last-child{
+        text-align: right;
+    }
+    
+    th:last-child{
+        text-align: right;
+    }
+    
+    
+    
+    
+    @media only screen and (max-width:600px){
+        .row{
+            text-align: center;
+        }
+        .cart-info p{
+            display: none;
+        }
+
+  
+    }
+    </style>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> -->
+    <title>Add to Cart</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light sticky-top">
+        <div class="container-fluid">
+            
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'Home' %}">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"  href="{%url 'item' %}">Products</a>
+                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{%url 'contactus' %}"><i aria-hidden="true"></i>contactus</a>
+                  </li>  
+                  <li class="nav-item">
+                      <a class="nav-link" href="{%url 'wishlist' %}"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{%url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                  </li>
+                </ul>        
+
+            </div>
+                
+        </div>
+    </nav>
+
+    <h2>Your Cart</h2>
+    <div class="small-container cart-page" >
+        <table>
+            <tr>
+                  <th>Product</th>
+                  <th>Description</th>
+                  <th>SubTotal</th>
+                  <th>        </th>
+                  <th>        </th>
+             </tr>
+             {%for i in cart%}
+             <tr>
+                 <td>
+                     <div class="cart-info">
+                         <img src="/media/{{i.product_id.images}}">
+                         <!-- <div class="star">
+                            <br>
+                            <br>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                         </div> -->
+                         <div>
+                             <!-- <p>{{i.product_id.description}}</p>
+                            <small>price: {{i.product_id.price}}</small>
+                            <br> -->
+                            <td><p>{{i.product_id.description}}</p></td>
+                            <td><p>{{i.product_id.price}}</p></td>
+                            <!-- <td><input type="number" value="1"></td> -->
+                            <form action="/shop/delete" method="post">
+                                {%csrf_token%}
+                            <input hidden=true name="id" type="text" value="{{i.Cart_id}}">
+                            <td><button type="submit">Delete</button></form></td>
+
+                            </tr>
+                            {%endfor%}
+                         </div>
+                     </div>
+                 </td>
+                 <td>{{i.Total_Bill}}</td>
+                 </tr>
+             
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>SubTotal</td>
+                    <td>{{total}}</td>
+
+                </tr>
+                <tr>
+                    <td>GST</td>
+                    <td>10%</td>
+                </tr>
+                <tr>
+                    <td>
+                        Total
+                    </td>
+                    <td>{{grand}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- <button class="button1", style="float: right;" >Pay on Delivery</button> -->
+    <button class="button1", style="float: right;" ><a class="nav-link" href="{%url 'totalbalance' %}">Total Balance</a></button>
+    <br>
+    <br>
+    <br>
+    <button class="button1", style="float: right;" ><a class="nav-link" href="{%url 'checkout' %}">Pay on Delivery</a></button>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+{% load static %}
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  h1 {
+      text-align: center;
+      padding-top: 40px;
+    }
+
+    body {
+      font-family: Arial;
+      color: rgb(15, 15, 15);
+    }
+
+    /* .split {
+  height: 60%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 80;
+  overflow-x: hidden;
+  padding-top: 20px;
+} */
+
+    .left {
+      height: 60%;
+      width: 35%;
+      position: fixed;
+      z-index: 1;
+      top: 120;
+      overflow-x: hidden;
+      padding-top: 20px;
+      left: 180;
+      background-color: rgb(114, 106, 106);
+      padding-top: 50px;
+      padding-right: 30px;
+      padding-bottom: 50px;
+      padding-left: 30px;
+      border-radius: 25px;
+      color: rgb(17, 17, 17);
+    }
+
+    .right {
+      height: 60%;
+      width: 65%;
+      position: fixed;
+      z-index: 1;
+      top: 70;
+      /* overflow-x: hidden; */
+      padding-top: 20px;
+      right: 0;
+      /* background-image: url("background.jpeg" ); */
+      padding-top: 50px;
+      padding-right: 30px;
+      padding-bottom: 50px;
+      padding-left: 80px;
+      border-radius: 25px;
+    }
+
+    .centered {
+      display: inline-block;
+      text-align: left;
+    }
+
+    .centered img {
+      border-radius: 25px;
+    }
+
+    input[type=text],
+    textarea {
+      width: 188px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin: 0px;
+
+      box-sizing: border-box;
+      /* margin-top: 6px;
+      margin-bottom: 16px; */
+      resize: none;
+
+    }
+
+    .firstname {
+      position: absolute;
+      top: 150px;
+      left: 200px;
+
+    }
+
+    .lastname {
+      position: absolute;
+      top: 150px;
+      right: 250px;
+
+    }
+
+    .email {
+      position: absolute;
+      top: 220px;
+      left: 200px;
+
+    }
+    .subject {
+      position: absolute;
+      top: 220px;
+      right: 250px;
+
+    }
+
+    .message {
+      position: absolute;
+      top: 300px;
+      left: 200px;
+
+    }
+
+    button {
+      background-color: #0a0a0a;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      position: absolute;
+      top: 522px;
+      left: 420px;
+
+    }
+    .icon{
+      display: flex;
+      margin-top:50px;
+      align-items: center;
+    }
+
+</style> 
+</head>
+
+<body>
+  
+  <h1>CONTACT US</h1>
+  <form  method="post" action="contactus">
+   {% csrf_token %} 
+  <div class="split left">
+    <div class="centered">
+      <!-- <img src="img_avatar2.png" alt="Avatar woman"> -->
+      <h2> Contact Information </h2>
+      <p>Fill up the form and our team will <br>get back to you within 24 hour..</p>
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-telephone-fill"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+        </svg>
+        <b  style="margin-left: 20px;">+91 8376952240</b>
+      </div>
+      <br>
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+          <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+        </svg>
+        <b style="margin-left: 20px;">indiefashionnew@gmail.com</b>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div class="split right">
+    <div class="centered">
+      <img src= "{% static 'shop/images/background.jpeg' %}" width="850">
+      <form action="">
+        <div class="firstname">
+          <b>First Name</b>
+          <input type="text" name="fname" id="fname" placeholder="Enter First Name ">
+        </div>
+        <div class="lastname">
+          <b>Last Name</b>
+          <input type="text" name="lname"  id="lname" placeholder="Enter Last Name ">
+        </div>
+        <div class="email">
+          <b>Email ID</b>
+          <input type="text" name="emailid"  id="emailid" placeholder="Enter your Email." required>
+        </div>
+        
+        <div class="subject">
+          <b>Subject</b>
+          <input type="text" name="subject"  id="subject" placeholder="Subject" required>
+        </div>
+        <div class="message">
+          <b style="display: grid;">Message</b>
+          <textarea name="messages"  id="messages" placeholder="Write Something.." style="height:180px; width: 500px;"></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  </form>
+
+</body>
+
+</html>

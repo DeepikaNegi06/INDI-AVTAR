@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+        {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shop/style.css' %}">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Product</title>
+    <style>
+        .geeks {
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+      
+        .geeks img {
+            width: 100%;
+            transition: 0.5s all ease-in-out;
+        }
+      
+        .geeks:hover img {
+            transform: scale(1.5);
+        }
+    </style>
+
+</head>
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-md navbar-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="{% static "shop/images/logo-removebg-preview.png" %}" alt="" /></a>
+            
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'Home' %}">Home</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'Home' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                   
+                    {%if user.is_authenticated%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'wishlist' %}"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{%url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{%url 'getout' %}"> Logout</a>
+                    </li>
+                    {%else%}
+                      <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Login/Register
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="{%url 'signup' %}">Registration</a>
+                              <a class="dropdown-item" href="{%url 'getin' %}">Login</a>
+                              
+                            </div>
+                          </div>
+                      </li>
+                      {%endif%}
+                      
+                </ul>        
+
+            </div>     
+        </div>
+    </nav>
+    <!-- <section id="filters">
+
+        <div class="row container mx-auto">
+            <div class="dropdown col-lg-4 col-md-4 col-12 mt-5">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Categories
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  {%for cattype in itm %}  
+                  <a class="dropdown-item" href="#">{{cattype.fabric_types}}</a>
+                  {%endfor%}
+                </div>
+              </div>
+              <div class="dropdown col-lg-4 col-md-4 col-12 mt-5">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Colors
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">red</a>
+                  <a class="dropdown-item" href="#">green</a>
+                  <a class="dropdown-item" href="#">orange</a>
+                </div>
+              </div>
+              <div class="dropdown col-lg-4 col-md-4 col-12 mt-5">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Price
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">500-600</a>
+                  <a class="dropdown-item" href="#">700-900</a>
+                  <a class="dropdown-item" href="#">1000 above</a>
+                </div>
+
+              </div>
+               -->
+        </div>
+    </section>
+
+    <section id="featured" class="my-5 py-5">
+        <div class="container py-5 mt-5">
+            <h2 class="font-weight-bold">Products</h2>
+        </div>
+        <div class="row mx-auto container-fluid">
+            {%for product in products%}
+            <div class="product text-center col-lg-4 col-md-4 col-12">
+            <div class="geeks">
+              <img class="img-fluid mb-3" src="/media/{{product.images}}" alt="" />
+                <div class="star">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                </div>
+                <br><br>
+                <h4 class="p-price"><span style='font-size:20px;'>&#8377;</span> {{product.price}}</h4>
+                <p>{{product.description}}</p>
+                <div class="d-flex flex-row justify-content-center align-items-center ">
+                    <form action="{% url 'cart' %}" method="post">
+                        {%csrf_token%}
+                        <input hidden=true name="product_id" type="text" value="{{product.product_id}}">
+                        <input hidden=true name="price" type="text" value="{{product.price}}">
+                        <input hidden=true name="qty" type="number" value=1>
+                    <button type="submit" class="btn btn-danger">Add to cart</button></form>
+                    <form action="{% url 'wishlist' %}" method="post">
+                        {%csrf_token%}
+                        <input hidden=true name="product_id" type="text" value="{{product.product_id}}">
+                    <button type ="submit" style="border: none; background-color: white;"><i class="fa fa-heart" aria-hidden="true"></i></button> </form>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+
+         <!-- <nav aria-label="...">
+                <ul class="pagination mt-5">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  </li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>   -->
+        </div>
+    </section>
+    
+    <!--footer-->
+    <footer class="mt-5 py-5">
+        <div class="row container mx-auto pt-5">
+            <div class="footer-one col-lg-6 col-md-6 col-12">
+                <h5 class="pb-2">Quick links</h5>
+                <ul class="text-uppercase list-unstyled">
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="{%url 'contactus' %}">Contact Us</a></li>
+                    <li><a href="#">Featured Products</a></li>
+                    <li><a href="#">cart</a></li>
+                    <li><a href="#">Payment gateway</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-one col-lg-4 col-md-6 col-12">
+                <h5 class="pb-2">Contact</h5>
+                <div>
+                    <h6 class="text-uppercase">Address</h6>
+                    <p>123 street name,city,India</p>
+                </div>
+                <div>
+                    <h6 class="text-uppercase">Phone Number</h6>
+                    <p>123456789</p>
+                </div>
+                <div>
+                    <h6 class="text-uppercase">Email</h6>
+                    <p>123 street name,city,India</p>
+                </div>
+            </div>
+        </div>
+        <div class="container padding">
+            <div class="row text-center">
+                <div class="col-12">
+                    <div class="container-fluid padding" id="connect">
+                        <div class="row text-center padding">
+                            <div class="col-12">
+                                <h4 class="pt-5">Connect</h4>
+                                <hr>
+                            </div>
+                            <div class="col-12 social padding">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <P>&copy;2022 <br>All rights reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

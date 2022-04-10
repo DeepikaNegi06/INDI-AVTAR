@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="{% static 'shop/style1.css' %}">
+</head>
+<body>
+
+<div class="splitleft">
+  <div class="centered">
+  <img src="{% static 'shop/images/Artboard 5-20.jpg' %}" style="width:200px" class="img">
+    <h2>Indi Avtar</h2>
+    <p>Indi Avtar was founded by a group of like-minded fashion devotees, determined to deliver style to shoppers worldwide. Our store offers a huge collection of Ladies Suits for women at affordable prices also we want to create an ease for customers to buy products directly from an online shopping site and save there time . 
+      
+    </p>
+  </div>
+</div>
+
+
+<div class="splitright">
+  <div class="centered">
+  <form action ='signup' method='post'>
+   {% csrf_token %}
+  <p style="font-size: 40px"><b> SignUp </b>
+    <hr>
+    <label for="firstname"><b><p style="color:black"; "font-size: 40px";>FirstName</b></label> 
+    <input type="text" placeholder="EnterFirstName" name="fname" id="fname" required>&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label for="lastname"><b>LastName</b></label>
+    &nbsp;
+    <input type="text" placeholder="EnterLastName" name="lname" id="lname" required>
+    <label for="username"><b><p style="color:black"; "font-size: 40px";>Username</b></label> 
+      <input type="text" placeholder="EnterFirstName" name="username" id="username" required>
+    <br><br> <label for="address"><b>Address</b></label>
+    <input type="text" placeholder="Enter Address" name="Address" id="Address" required>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;    <label for="state"><b>state</b></label>
+    <input type="text" placeholder="Enter state" name="state" id="state" required>
+
+<br><br>    <label for="city"><b>city</b></label>
+    <input type="text" placeholder="Enter city" name="city" id="city" required>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+&nbsp;&nbsp;&nbsp;&nbsp;<label for="Pincode"><b>Pincode</b></label>
+    <input type="text" placeholder="Enter Pincode" name="Pincode" id="Pincode" required>
+
+<br><br><label for="email"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email" name="email" id="email" required>
+
+
+
+<br><br>   <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id = "pswd" name="pswd"  required>
+    <span id = "message" style="color:red"> </span> <br><br>  
+
+   <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="repeatpassword" placeholder="Repeat Password" name="pswrepeat" id="pswrepeat" required>
+
+
+    <hr>
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+    <button onclick = "myFunction()" type="submit" class="registerbtn">SignUp</button> <button type="submit" class="registerbtn"><a href="{%url 'signup' %}"></a>cancel</button>
+    <p id="demo"></p>    
+  
+  <div class="container signin">
+    <p>Already have an account? <a href="getin">Sign in</a></p>
+
+</form>
+  </div>
+  </form>
+  </div>
+  </div>
+
+<script>
+function myFunction()
+{
+  var pw = document.getElementById("pswd").value;  
+  //check empty password field  
+  if(pw == "") {  
+     document.getElementById("message").innerHTML = "**Fill the password please!";  
+     return false;  
+  }  
+
+ //minimum password length validation  
+  if(pw.length < 8) {  
+     document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
+     return false;  
+  }  
+
+//maximum length of password validation  
+  if(pw.length > 15) {  
+     document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
+     return false;  }
+  // } else {  
+  //    alert("Password is correct");  
+  // }  
+
+  //  if(pw.length >=8)
+  //  {
+  //   }    
+  //      else if(confirm("Are you sure"))
+  //    {
+  //         pw = "submit";
+  //     }
+	// else
+  // 	{
+  //         pw = "incorrect pass";
+  //       }
+
+// after signup is done  
+   var txt;
+   if(confirm("Are you sure"))
+   {
+      txt = "signup successful";
+   }
+   else
+  {
+     txt = "signup not successful";
+  }
+
+  document.getElementById("demo").innerHTML=txt;
+
+}  
+</script>       
+</body>
+</html> 
+
+
+
+
+  
